@@ -1,0 +1,71 @@
+
+
+
+<script type="text/javascript"     src="/js/chart.js"></script>
+
+<div>
+	<canvas id="basicChart" width="260" height="200"></canvas>
+</div>
+
+
+<script type="text/javascript">
+
+
+
+	var barChData1={
+			labels:["Jekyll","Hugo","Wintersmith"],
+			datasets:[{
+				label:"Mean build time",
+				fillColor:"#E1EDD7",
+				strokeColor:"#E1EDD7",
+				highlightFill:"#C1D8AB",
+				highlightStroke:"#C1D8AB",
+				data:[784,100,5255],
+			}]
+		};
+
+
+	var barChData2 = {
+		labels : ["January","February","March","April","May","June","July"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [32,33,44,49,23,12,18]
+			},
+			{
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,0.8)",
+				highlightFill : "rgba(151,187,205,0.75)",
+				highlightStroke : "rgba(151,187,205,1)",
+				data : [92,83,54,69,73,82,88]
+			}
+		]
+	}
+	
+	var chConfig = {scaleBeginAtZero:true,
+			scaleShowGridLines:true,
+			scaleGridLineColor:"rgba(0,0,0,.05)",
+			scaleGridLineWidth:1,
+			barShowStroke:true,
+			barStrokeWidth:2,
+			barValueSpacing:5,
+			barDatasetSpacing:1,
+			responsive:true,
+			maintainAspectRatio:false,
+		};
+
+
+	window.onload = function(){
+		var ctx = document.getElementById("basicChart").getContext("2d");
+		var myBarChart =new Chart(ctx).Bar(barChData1,chConfig);
+	}
+
+
+
+	console.log('chart so far');
+
+</script>
+

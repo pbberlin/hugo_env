@@ -1,0 +1,133 @@
+{{ partial "header.html" . }}
+
+<div class="container">	
+
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h1 class="h1-page" >{{ or  .Title .Source.BaseFileName   }}</h1>
+				<span class="label label-primary">
+				{{ .Date.Format "2. " }} &nbsp;{{ .Date.Format "Jan 2006" }}
+				</span>
+				&nbsp;&nbsp; &middot; &nbsp; 
+				{{ partial "tags-and-categories" . }}
+			</small>
+		</div>
+	</div>
+
+
+	<div class="row" style="margin-top:12px;">
+
+		<div class="col-md-offset-1 col-md-10">
+
+			<style type="text/css">
+				@media (min-width: 992px) {
+				    .vertical-margin-navi {
+						margin-top:50px; 
+						margin-bottom:12px; 
+				    }
+				}
+			    .well-pad {
+			    	padding: 8px 0px;
+			    }
+			</style>
+
+			<!-- include table of contents and/or outline - start-->
+			<!-- the outer margin of this div persist even if no menu is displayed :( -->
+			<div
+				class='col-xs-12 col-md-4  col-md-offset-1 vertical-margin-navi' 
+				style='
+				padding:0px;
+				padding-right:4px;
+				font-size:90%;
+				
+				float:right; 
+				'
+			>
+
+				<!--
+				<div id="toc" class="well col-md-4 col-sm-6" >
+				-->
+
+
+			        {{ $currNd := . }}
+	               	{{ $.Scratch.Set "mnuName" "" }}
+
+	               	<!-- prepare variables -->	
+			        {{ range .Site.Menus.mnuMoney01 }}
+	                  {{if $currNd.IsMenuCurrent "mnuMoney01" . }}
+	                  	{{ $.Scratch.Set "mnuName" "mnuMoney01" }}
+	                  {{end}}
+	                  {{if $currNd.HasMenuCurrent "mnuMoney01" . }}
+	                  	{{ $.Scratch.Set "mnuName" "mnuMoney01" }}
+	                  {{end}}
+			        {{end}}
+
+
+			        {{ range .Site.Menus.mnuChildhood01 }}
+	                  {{if $currNd.IsMenuCurrent "mnuChildhood01" . }}
+	                  	{{ $.Scratch.Set "mnuName" "mnuChildhood01" }}
+	                  {{end}}
+	                  {{if $currNd.HasMenuCurrent "mnuChildhood01" . }}
+	                  	{{ $.Scratch.Set "mnuName" "mnuChildhood01" }}
+	                  {{end}}
+			        {{end}}
+
+
+
+	               	<!-- include the different menues -->	
+					{{if eq ($.Scratch.Get "mnuName") "mnuChildhood01"}}
+						<div id="toc" class="well  well-pad" >
+							{{ partial "menu-sidebar-childhood.html" . }}
+					    </div>
+					{{end}}
+					{{if eq ($.Scratch.Get "mnuName") "mnuMoney01"}}
+						<div id="toc" class="well  well-pad" >
+							{{ partial "menu-sidebar-money.html" . }}
+					    </div>
+					{{end}}
+		
+
+
+
+				{{ if gt (len .TableOfContents) 10 }}
+					<div id="toc" class="well  well-pad" >
+						{{ .TableOfContents }}
+					</div>			
+				{{ end }}
+
+			</div>			
+			<!-- include table of contents and/or outline - end  -->
+
+
+			{{ .Content }}
+
+		</div>
+
+	</div>
+
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<hr>
+		</div>
+	</div>	
+
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<!-- disqus 
+			disqus 
+			{{ template "_internal/disqus.html" . }}
+			-->
+			{{ partial "disqus-online.html" . }}
+		</div>
+	</div>	
+
+
+</div>
+
+
+{{ partial "footer.html" . }}
+

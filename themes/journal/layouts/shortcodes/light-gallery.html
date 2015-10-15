@@ -1,0 +1,33 @@
+
+
+
+<link type="text/css" rel="stylesheet" href="/css/light-gallery.css" />
+
+<!--
+    /js/light-gallery.js needs to be loaded after jQuery.
+    jQuery is currently in the footer.
+    Otherwise: 'lightGallery is not a function'
+-->
+{{ $.Scratch.Set "require_js_light" 1 }}
+
+
+
+
+
+
+
+<ul id="gallery01"  style="list-style: none;">
+    <li data-src="/img/chevy-1956-high.jpg">
+        <img src="/img/chevy-1956.jpg"></img>
+    </li>
+    <li data-src="/img/nordmarka-high.jpg">
+        <img src="/img/nordmarka.jpg"></img>
+    </li>
+</ul>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#gallery01").lightGallery(); 
+	});
+</script>

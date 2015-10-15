@@ -1,0 +1,89 @@
+    <!-- 
+            https://developers.google.com/identity/sign-in/web/backend-auth
+
+    -->
+
+    <!-- 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    -->
+    <script src="https://apis.google.com/js/client:platform.js?onload=gapi_start" async defer></script>
+
+    <!-- google signin button -->
+    <div class="row" style='margin-left:120px;'>
+                <!--
+                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+                -->
+            <a href="#" onclick="signIn();" >Sign in</a> &nbsp; &nbsp; &nbsp; 
+            <a href="#" onclick="signOut();">Sign out</a> &nbsp; &nbsp; &nbsp; 
+            <a href="#" onclick="show();">Show</a>
+    </div>
+
+    <script type="text/javascript">
+
+
+
+        var id_token = "default_id_token";          
+
+        // $(document).ready(function() {
+        //});
+        function gapi_start() {            
+
+            gapi.load('auth2', function() {
+
+                auth2 = gapi.auth2.init({
+                    client_id: '153437159745-hcrfa6skjjf2em9tsktjkptgipl7j7t2.apps.googleusercontent.com',
+                    fetch_basic_profile: false,
+                    scope: 'profile'
+                });
+
+                auth2.signIn().then(function() {
+                    console.log("ID1", auth2.currentUser.get().getId());
+                    id_token = auth2.currentUser.get().getAuthResponse().id_token;
+                    console.log("tokn1", id_token.substring(1, 10) );
+
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'https://tec-news.appspot.com/tokensignin');
+                    // xhr.open('POST', 'http://localhost:8087/tokensignin');
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                      console.log('srvmsg: ' + xhr.responseText);
+                    };
+                    xhr.send('idtoken=' + id_token);
+
+                });
+
+            });     
+        }
+
+
+    
+
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+              console.log('User signed out.');
+            });
+        }
+
+        function signIn() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signIn().then(function () {
+              console.log('User signed in.');
+            });
+        }
+
+
+
+        function show() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            var usr = auth2.currentUser.get();
+
+            console.log("isSigned in",usr.isSignedIn());
+            console.log("getID",usr.getId());
+            var tk = usr.getAuthResponse().id_token ;
+            console.log("tokn2", tk.substring(1, 10) );
+        }
+    </script>

@@ -1,0 +1,10 @@
+<!-- image-simplest -->
+    <img src="{{ .Get "src" }}"  style="{{ safeCSS  (.Get "style") }}"
+
+    {{ if or (.Get "alt") (.Get "title") }}
+        alt="{{ or (.Get "alt") (.Get "title") }}"
+        title="{{ or (.Get "title") (.Get "alt") }}"
+    {{ end }} 
+    />
+
+<!-- /image-simplest -->

@@ -1,0 +1,7 @@
+# Ignore files with extension `.exe`
+_*
+public
+cnt_*
+*.lnk
+*.log
+*.zip

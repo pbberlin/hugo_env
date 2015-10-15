@@ -1,0 +1,66 @@
+<!--sidebar start-->
+{{ $mName :=  ($.Scratch.Get "mnuName") }}
+{{ $mVar  :=  .Site.Menus.mnuChildhood01 }}
+  <aside>
+    <div id="sidebar" class="nav-collapse">
+      <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+          {{ $currentNode := . }}
+          {{ range $mVar }}
+
+              <!-- 
+              {{ $currentNode.HasMenuCurrent $mName . }} 
+              {{ $currentNode.IsMenuCurrent  $mName . }}<br>
+              -->
+              
+            {{ if .HasChildren }}
+
+              <li class="sub-menu">
+                <span href="javascript:;" class="expand-menu" >
+
+                    {{if $currentNode.IsMenuCurrent $mName . }}
+                        {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                    {{else if $currentNode.HasMenuCurrent $mName . }}
+                      <a class="active" href="{{.URL}}">
+                        {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                      </a>
+                    {{else}}
+                      <a class="" href="{{.URL}}">
+                        {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                      </a>
+                    {{end}}
+                  <span class="menu-arrow arrow_carrot-right"></span>
+
+                </span>
+
+
+                {{ range .Children }}
+                <ul class="sub">
+                    <li>
+                      {{if $currentNode.IsMenuCurrent $mName . }}
+                          {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                      {{else}}
+                        <a class="" href="{{.URL}}">
+                          {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                        </a>
+                      {{end}}
+                  </li>
+                </ul>
+               {{ end }}
+            {{else}}
+              <li class="">
+                {{if $currentNode.IsMenuCurrent $mName . }}
+                    {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                {{else}}
+                  <a class="" href="{{.URL}}">
+                    {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                  </a>
+                {{end}}
+            {{end}}
+              </li>
+          {{end}}
+        </ul>
+      <!-- sidebar menu end-->
+    </div>
+  </aside>
+<!--sidebar end-->

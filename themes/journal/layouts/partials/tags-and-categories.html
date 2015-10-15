@@ -1,0 +1,43 @@
+
+
+					{{ range $i, $e :=.Params.categories }}
+						{{ $.Scratch.Set "foundAny" 1 }}
+						{{ $.Scratch.Set "foundCat" 1 }}
+					{{ end }}
+
+					{{ range $i, $e :=.Params.tags }}
+						{{ $.Scratch.Set "foundAny" 1 }}
+					{{ end }}
+
+
+					{{if eq ($.Scratch.Get "foundAny") 1}}
+						&nbsp; in
+					{{end}}
+	
+					<!-- the comma immediately adjoining previous </a> -->
+					{{ range $i, $e :=.Params.categories }}{{if $i}}, {{end}}
+						<a href="/categories/{{ . | urlize }}">{{ . }}</a>{{ end }}
+
+					{{if eq ($.Scratch.Get "foundCat") 1}}
+						&nbsp; &middot; &nbsp;
+					{{end}}
+
+
+					{{ range $i, $e :=.Params.tags }}{{if $i}}, {{end}}
+						<a href="/tags/{{ . | urlize }}">{{ . }}</a>{{ end }}
+
+
+					{{if eq ($.Scratch.Get "foundAny") 1}}
+						&nbsp; &middot; &nbsp;
+					{{end}}
+
+					<!-- {{ .FuzzyWordCount  }} -->
+					{{ .WordCount  }}&nbsp;words   
+
+
+					{{if gt .ReadingTime 1}}
+						&nbsp; &middot; &nbsp; {{ .ReadingTime  }} minutes
+					{{end}}
+
+
+					
