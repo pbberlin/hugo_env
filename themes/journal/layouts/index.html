@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
 	<div class="container">
 	<!--   range first 20 .Data.Pages.ByDate.Reverse -->
-		{{ range first 20 .Data.Pages.ByWeight.Reverse }}
+		{{ range first 20 .Data.Pages.ByWeight }}
 			{{ .Render "frontpage-post" }}
 		{{ end }}
 	</div>

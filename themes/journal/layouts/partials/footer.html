@@ -5,14 +5,10 @@
             {{if eq  "economics" .Site.Params.ContentGroup }}
                 {{ partial "footer_recommendations.html" . }}
             {{end}}
-
             <div>
-
                 <p>
                     &copy;2015 {{ .Site.Params.AuthorName }} <!-- ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> -->
-
                     &nbsp; &nbsp; &nbsp; 
-
                     <!--
                         List of content types (Pages, Posts) 
                         SectionPagesMenu = "mnuSections"
@@ -22,88 +18,77 @@
                     {{/* range  $idx, $lp := .Site.Pages.GroupBy "Section" */}}
                         <!-- => use $lp.Key instead of $lp.Name -->
                     {{   range  $idx, $lp := .Site.Pages.GroupBy "Section" }}
-
-
                         {{if      eq $lp.Key "page"    }}
-
                         {{else if eq $lp.Key "member"  }}
-
                         {{else}}
-
                             {{if eq ($.Scratch.Get "not_first") 1}}
                                 &middot; 
                             {{end}}
-
                             {{$.Scratch.Set "not_first"  1}}
-                            
-
-
                             {{ $cmp1 := lower  $.Title        }}
                             {{ $cmp1 := substr $cmp1     0 4  }}
                             {{ $cmp2 := substr $lp.Key   0 4  }}
-
                             {{if eq  $cmp1 $cmp2 }}
                                 {{ title $lp.Key }}
                             {{else}}                     
                                <a href="/{{ urlize $lp.Key }}">{{ title $lp.Key }}</a>  
                             {{end}}
-
-
                         {{end}}
-
-
                     {{ end }}
-
-
-
                 </p>
-
-
-
             </div>
             </footer>
         </div>
     </div>
 
-    <!-- container section end -->
-    <!-- javascripts -->
+    {{ if      eq .Section "page" }}
+
+        [REPLACE_FOOTER]
+
+    {{else}}
+
+        <!-- container section end -->
+        <!-- javascripts -->
 
 
-    <!--
-        Use pre-cached jquery from online - if offline fallback to self-hosted version.
-        For fun, we use slightly different versions.
-        <script src="/js/jquery-min-2.1.1.js"></script>
-    -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/js/jquery-min-2.1.1.js">\x3C/script>')</script>    
+        <!--
+            Use pre-cached jquery from online - if offline fallback to self-hosted version.
+            For fun, we use slightly different versions.
+            <script src="/js/jquery-min-2.1.1.js"></script>
+        -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/js/jquery-min-2.1.1.js">\x3C/script>')</script>    
 
-    <script src="/js/bootstrap.min-3.1.1.js"></script>
+        <script src="/js/bootstrap.min-3.1.1.js"></script>
 
-    {{if eq ($.Scratch.Get "require_js_light") 1}}
-        <!-- must stand after last jQuey load  -->
-        <script src="/js/light-gallery.js"></script>
+        {{if eq ($.Scratch.Get "require_js_light") 1}}
+            <!-- must stand after last jQuey load  -->
+            <script src="/js/light-gallery.js"></script>
+        {{end}}
+
+        <!--
+        {{ partial "google-client-auth" . }}
+        -->
+
+        <!--    
+        <script>
+            // impossible since domains are distinct:
+            $( document ).ready(function() {
+                var timerID = setTimeout(deferredFunc, 1000);
+                function deferredFunc() {
+                    $('#dsq-app1').contents().find('#no-posts').css({"line-height": "32px"});
+                    console.log( "did2" );
+                }
+            });
+        </script> 
+        -->
+
+        <script>
+            console.log("end of page " + $.fn.jquery + " Version")
+        </script> 
+
     {{end}}
 
-    <!--
-    {{ partial "google-client-auth" . }}
-    -->
-
-    <!--    
-    <script>
-        // impossible since domains are distinct:
-        $( document ).ready(function() {
-            var timerID = setTimeout(deferredFunc, 1000);
-            function deferredFunc() {
-                $('#dsq-app1').contents().find('#no-posts').css({"line-height": "32px"});
-                console.log( "did2" );
-            }
-        });
-    </script> 
-    -->
-
-    <script>
-        console.log("end of page " + $.fn.jquery + " Version")
-    </script> 
 
     </body>
 </html>
