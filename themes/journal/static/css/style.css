@@ -1,0 +1,17 @@
+
+.header-banner {
+	background-image:url(/img/tec-news-banner.gif);  /* sitespecific overwrite */
+	background-position: 75% 30% ; 
+	background-repeat: no-repeat; 
+	border:none;
+}
+
+.unused {
+	background-color:#e22620; 
+	background-color:#eb6864; 
+	padding: 0px 6px;
+}
+
+.navbar-anchor-background {
+	background-color:#eb6864; 
+}

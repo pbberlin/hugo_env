@@ -23,18 +23,22 @@
 <body lang="en">
 	<div class="container">
 		<div class="row" style='margin-top:12px'>
-			<div class="navbar navbar-default navbar-inverse" role="navigation">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			<div class="navbar navbar-default navbar-inverse header-banner" role="navigation"
+				style="background-image:url(/img/{{.Site.Params.ShortName}}-banner.gif)"
+			>
+				<div class="navbar-header"   >
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse"  >
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{.Site.BaseURL}}">{{ .Site.Title }}</a> 
+					<a class="navbar-brand navbar-anchor-background" href="{{.Site.BaseURL}}"  >
+						{{ .Site.Title }}
+					</a> 
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="{{ .Site.BaseURL }}">Home</a></li>
+						<li><a href="{{ .Site.BaseURL }}"  class="navbar-anchor-background">Home</a></li>
 						<!--
 						<li><a href="{{ .Site.BaseURL }}tech-news/">Tec News</a></li>
 						<li><a href="{{ .Site.BaseURL }}page/about/">About</a></li>
