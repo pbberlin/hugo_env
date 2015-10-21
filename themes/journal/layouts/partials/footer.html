@@ -18,8 +18,15 @@
                     {{/* range  $idx, $lp := .Site.Pages.GroupBy "Section" */}}
                         <!-- => use $lp.Key instead of $lp.Name -->
                     {{   range  $idx, $lp := .Site.Pages.GroupBy "Section" }}
-                        {{if      eq $lp.Key "page"    }}
-                        {{else if eq $lp.Key "member"  }}
+
+                        <!-- unique equaller syntax
+
+                        {if  eq   .Val  "page" "member" "intro" }
+                            is page or member
+                        {end}
+                        -->
+                        {{if      or   (eq $lp.Key "page")  (eq $lp.Key "member")  (eq $lp.Key "transition")  }}
+                            <!-- exclude from menu -->
                         {{else}}
                             {{if eq ($.Scratch.Get "not_first") 1}}
                                 &middot; 
@@ -43,7 +50,7 @@
 
     {{ if      eq .Section "page" }}
 
-        [REPLACE_FOOTER]
+        <span id='REPLACE_FOOTER'></span>
 
     {{else}}
 
