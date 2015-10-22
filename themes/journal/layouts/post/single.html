@@ -74,35 +74,31 @@
 
 	               	<!-- prepare variables -->	
 			        {{ range .Site.Menus.mnuMoney01 }}
-	                  {{if $currNd.IsMenuCurrent "mnuMoney01" . }}
-	                  	{{ $.Scratch.Set "mnuName" "mnuMoney01" }}
-	                  {{end}}
-	                  {{if $currNd.HasMenuCurrent "mnuMoney01" . }}
+	                  {{if or ($currNd.IsMenuCurrent "mnuMoney01" .) ($currNd.HasMenuCurrent "mnuMoney01" .) }}
 	                  	{{ $.Scratch.Set "mnuName" "mnuMoney01" }}
 	                  {{end}}
 			        {{end}}
 
 
 			        {{ range .Site.Menus.mnuChildhood01 }}
-	                  {{if $currNd.IsMenuCurrent "mnuChildhood01" . }}
-	                  	{{ $.Scratch.Set "mnuName" "mnuChildhood01" }}
-	                  {{end}}
-	                  {{if $currNd.HasMenuCurrent "mnuChildhood01" . }}
+	                  {{if or ($currNd.IsMenuCurrent "mnuChildhood01" .) ($currNd.HasMenuCurrent "mnuChildhood01" .) }}
 	                  	{{ $.Scratch.Set "mnuName" "mnuChildhood01" }}
 	                  {{end}}
 			        {{end}}
 
 
+			        {{ range .Site.Menus.mnuVirtualCurrencies }}
+	                  {{if or ($currNd.IsMenuCurrent "mnuVirtualCurrencies" .) ($currNd.HasMenuCurrent "mnuVirtualCurrencies" .) }}
+	                  	{{ $.Scratch.Set "mnuName" "mnuVirtualCurrencies" }}
+	                  {{end}}
+			        {{end}}
 
-	               	<!-- include the different menues -->	
-					{{if eq ($.Scratch.Get "mnuName") "mnuChildhood01"}}
+
+
+	               	<!-- include the menue -->	
+					{{if ne ($.Scratch.Get "mnuName") ""}}
 						<div id="toc" class="well  well-pad" >
-							{{ partial "menu-sidebar-childhood.html" . }}
-					    </div>
-					{{end}}
-					{{if eq ($.Scratch.Get "mnuName") "mnuMoney01"}}
-						<div id="toc" class="well  well-pad" >
-							{{ partial "menu-sidebar-money.html" . }}
+							{{ partial "menu-sidebar.html" . }}
 					    </div>
 					{{end}}
 		

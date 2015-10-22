@@ -1,6 +1,7 @@
 <!--sidebar start-->
 {{ $mName :=  ($.Scratch.Get "mnuName") }}
-{{ $mVar  :=  .Site.Menus.mnuMoney01 }}
+{{ $mVar  :=  index .Site.Menus $mName }}
+
     <aside>
       <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
