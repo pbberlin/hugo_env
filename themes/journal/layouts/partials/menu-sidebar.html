@@ -1,13 +1,13 @@
 <!--sidebar start-->
 {{ $mName :=  ($.Scratch.Get "mnuName") }}
-{{ $mVar  :=  index .Site.Menus $mName }}
+{{ $mnObj :=  index .Site.Menus $mName }}
 
     <aside>
       <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
           <ul class="sidebar-menu">
             {{ $currentNode := . }}
-            {{ range $mVar }}
+            {{ range $mnObj }}
 
                 <!-- 
                 {{ $currentNode.HasMenuCurrent $mName . }} 
@@ -40,11 +40,57 @@
                       <li>
                         {{if $currentNode.IsMenuCurrent $mName . }}
                             {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                        {{else if $currentNode.HasMenuCurrent $mName . }}
+                          <a class="active" href="{{.URL}}">
+                            {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                          </a>
                         {{else}}
                           <a class="" href="{{.URL}}">
                             {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
                           </a>
                         {{end}}
+
+
+                            {{ range .Children }}
+                            <ul class="sub">
+                                <li>
+                                  {{if $currentNode.IsMenuCurrent $mName . }}
+                                      {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                                  {{else if $currentNode.HasMenuCurrent $mName . }}
+                                    <a class="active" href="{{.URL}}">
+                                      {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                                    </a>
+                                  {{else}}
+                                    <a class="" href="{{.URL}}">
+                                      {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                                    </a>
+                                  {{end}}
+
+
+                                          {{ range .Children }}
+                                          <ul class="sub">
+                                              <li>
+                                                {{if $currentNode.IsMenuCurrent $mName . }}
+                                                    {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                                                {{else if $currentNode.HasMenuCurrent $mName . }}
+                                                  <a class="active" href="{{.URL}}">
+                                                    {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                                                  </a>
+                                                {{else}}
+                                                  <a class="" href="{{.URL}}">
+                                                    {{ .Pre }} <span>{{ or .Name .Identifier }}</span>
+                                                  </a>
+                                                {{end}}
+                                            </li>
+                                          </ul>
+                                         {{ end }}
+
+
+                              </li>
+                            </ul>
+                           {{ end }}
+
+
                     </li>
                   </ul>
                  {{ end }}

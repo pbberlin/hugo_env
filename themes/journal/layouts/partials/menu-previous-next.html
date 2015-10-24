@@ -1,0 +1,61 @@
+{{ $mName :=  ($.Scratch.Get "mnuName") }}
+{{ $mnObj :=  index .Site.Menus $mName }}
+{{ $curNd := . }}
+
+<!-- 
+  {{ range $mnuKey, $entry :=  .Menus }}
+        This page belongs to <i>menu</i> {{$mnuKey}}<br>
+        
+        Accessing menu {{$mnuKey}}: 
+           {{ $mnu  :=  index $.Site.Menus $mnuKey }}... it has {{len $mnu}} top level entries.<br>
+        This page has the menu <i>entry</i> "{{$entry.Name}}"  ID "{{$entry.Identifier}}" 
+
+  {{ end}}
+-->
+
+{{ range $mnuKey, $entry :=  .Menus }}
+
+<!-- 
+    menu -{{$mName}}- has -{{len $mnObj}}- top level entries<br>
+    current page has a menu entry in menu -{{$mnuKey}}- <br>
+    &nbsp; &nbsp; entry name: "{{$entry.Name}}"  ident_"{{$entry.Identifier}}" parent_"{{$entry.Parent}}"<br>
+-->
+
+    {{ $prev1 :=  $mnObj.Prev $entry }}
+    {{ $next1 :=  $mnObj.Next $entry }}
+
+
+    {{ if or $prev1 $next1 }}
+        <hr>
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0  text-center" style='font-size:90%'>
+                <div style='float:left;'>Article series:</div>
+                <div style='position:relative;left:-120px;'>
+
+    {{ end }}
+
+    {{ if $prev1 }}
+      <a class="label label-primary" href="{{ $prev1.URL }}"  accesskey="p"><< &nbsp; {{ $prev1.Name }}</a>
+    {{ end }}
+
+
+    {{ if and $prev1 $next1 }}
+      &nbsp; | {{$curNd.Title}} | &nbsp;
+    {{ end }}
+
+    {{ if $next1 }}
+      <a class="label label-primary" href="{{ $next1.URL }}"  accesskey="n">{{ $next1.Name }} &nbsp; >> &nbsp; </a> 
+    {{ end }}
+
+
+    {{ if or $prev1 $next1 }}
+                </div>
+            </div>
+        </div>
+    {{ end }}
+
+
+{{end}}
+
+
+

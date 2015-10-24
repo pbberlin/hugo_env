@@ -94,6 +94,13 @@
 			        {{end}}
 
 
+			        {{ range .Site.Menus.mnuDeep }}
+	                  {{if or ($currNd.IsMenuCurrent "mnuDeep" .) ($currNd.HasMenuCurrent "mnuDeep" .) }}
+	                  	{{ $.Scratch.Set "mnuName" "mnuDeep" }}
+	                  {{end}}
+			        {{end}}
+
+
 
 	               	<!-- include the menue -->	
 					{{if ne ($.Scratch.Get "mnuName") ""}}
@@ -115,7 +122,11 @@
 			<!-- include table of contents and/or outline - end  -->
 
 
+
 			{{ .Content }}
+
+
+			{{ partial "menu-previous-next.html" . }}
 
 		</div>
 
@@ -142,6 +153,9 @@
 
 
 </div>
+
+
+
 
 
 {{ partial "footer.html" . }}

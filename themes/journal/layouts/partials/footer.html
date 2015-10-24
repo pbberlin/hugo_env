@@ -13,6 +13,7 @@
                         List of content types (Pages, Posts) 
                         SectionPagesMenu = "mnuSections"
                     -->
+                    &nbsp; Section(s): &nbsp; 
 
                     {{/* range  $idx, $lp := .Site.Menus.mnuSections */}}
                     {{/* range  $idx, $lp := .Site.Pages.GroupBy "Section" */}}
@@ -79,6 +80,7 @@
 
         <!--    
         <script>
+            // css-change into the disqus layout:
             // impossible since domains are distinct:
             $( document ).ready(function() {
                 var timerID = setTimeout(deferredFunc, 1000);
