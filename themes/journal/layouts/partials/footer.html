@@ -6,14 +6,21 @@
                 {{ partial "footer_recommendations.html" . }}
             {{end}}
             <div>
-                <p>
-                    &copy;2015 {{ .Site.Params.AuthorName }} <!-- ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> -->
-                    &nbsp; &nbsp; &nbsp; 
+                <p >
+                <div style="font-size:80%; float:right">
+                    <a target="blank" href="{{ .Site.Params.TwitterURL }} ">Twitter Contact</a>
+                </div>
+                    
+                    
+                    <!--
+                        &copy;2015 {{ .Site.Params.AuthorName }} 
+                     ~ Powered By <a href="http://hugo.spf13.com">Hugo</a> 
+                     -->
                     <!--
                         List of content types (Pages, Posts) 
                         SectionPagesMenu = "mnuSections"
                     -->
-                    &nbsp; Section(s): &nbsp; 
+                    Section(s): &nbsp; 
 
                     {{/* range  $idx, $lp := .Site.Menus.mnuSections */}}
                     {{/* range  $idx, $lp := .Site.Pages.GroupBy "Section" */}}
@@ -26,7 +33,7 @@
                             is page or member
                         {end}
                         -->
-                        {{if      or   (eq $lp.Key "page")  (eq $lp.Key "member")  (eq $lp.Key "transition")  }}
+                        {{if or (eq $lp.Key "page") (eq $lp.Key "member") (eq $lp.Key "transition") }}
                             <!-- exclude from menu -->
                         {{else}}
                             {{if eq ($.Scratch.Get "not_first") 1}}

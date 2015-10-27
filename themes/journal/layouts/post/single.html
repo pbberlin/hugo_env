@@ -3,15 +3,10 @@
 <style type="text/css">
 
 .subline {
-	font-size:90%;
+	/* not in list templates */
+	font-size: 90%;
 	letter-spacing: 2px; 
 	word-spacing:   3px;
-
-	aatext-decoration: underline;
-
-	aatext-transform: uppercase; 
-	aatext-shadow: 1px 1px #222; 
-
 	display: block;
 	margin-bottom: 36px;
 }
@@ -24,13 +19,12 @@
 
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
-			<h1 class="h1-page" >{{ or  .Title .Source.BaseFileName   }}</h1>
-				<span class="label label-primary">
-				{{ .Date.Format "2. " }} &nbsp;{{ .Date.Format "Jan 2006" }}
-				</span>
-				&nbsp;&nbsp; &middot; &nbsp; 
-				{{ partial "tags-and-categories" . }}
-			</small>
+			<h1 class="h1-page" >{{ or .Title .Source.BaseFileName }}</h1>
+			<span class="label label-primary">
+			{{ .Date.Format "2. " }} &nbsp;{{ .Date.Format "Jan 2006" }}
+			</span>
+			&nbsp;&nbsp; &middot; &nbsp; 
+			{{ partial "tags-and-categories" . }}
 		</div>
 	</div>
 
@@ -122,6 +116,8 @@
 			<!-- include table of contents and/or outline - end  -->
 
 
+	        <span id='REPLACE_BEFORE_CONTENT'></span>
+
 
 			{{ .Content }}
 
@@ -140,16 +136,11 @@
 		</div>
 	</div>	
 
-
-	<div class="row">
-		<div class="col-md-offset-1 col-md-10">
-			<!-- disqus 
-			disqus 
-			{{ template "_internal/disqus.html" . }}
-			-->
-			{{ partial "disqus-online.html" . }}
-		</div>
-	</div>	
+	{{if or (eq .Section "page") (eq .Section "member") (eq .Section "transition") }}
+		<!-- no discussion here -->
+	{{else}}
+		{{ partial "disqus-online.html" . }}
+	{{end}}
 
 
 </div>
