@@ -1,11 +1,20 @@
 <!--sidebar start-->
+<div style='position: absolute; top: -75px; width: 500px;'>
+  {{ partial "menu-previous-next.html" . }}
+</div>
+
+
 {{ $mName :=  ($.Scratch.Get "mnuName") }}
 {{ $mnObj :=  index .Site.Menus $mName }}
 
+
     <aside>
       <div id="sidebar" class="nav-collapse">
+
         <!-- sidebar menu start-->
           <ul class="sidebar-menu">
+
+
             {{ $currentNode := . }}
             {{ range $mnObj }}
 

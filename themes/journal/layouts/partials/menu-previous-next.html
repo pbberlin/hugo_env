@@ -21,38 +21,63 @@
     &nbsp; &nbsp; entry name: "{{$entry.Name}}"  ident_"{{$entry.Identifier}}" parent_"{{$entry.Parent}}"<br>
 -->
 
+
+
+
+<!--
+    {{ $prev2 :=  $mnObj.PrevSameLevel $entry }}
+    {{if $prev2 }}
+      P  {{ $prev2.Name }}     
+    {{end}}
+    {{ $up :=  $mnObj.Up $entry }}
+    {{if $up }}
+      U  {{ $up.Name }} 
+    {{end}}
+    {{ $next2 :=  $mnObj.NextSameLevel $entry }}
+    {{if $next2 }}
+       N {{ $next2.Name }}     
+    {{end}}
+-->
+
+    <hr>
+
+
     {{ $prev1 :=  $mnObj.Prev $entry }}
     {{ $next1 :=  $mnObj.Next $entry }}
 
-
-    {{ if or $prev1 $next1 }}
-        <hr>
+    {{if or $prev1 $next1 }}
         <div class="row">
-            <div class="col-md-12 col-md-offset-0  text-center" style='font-size:90%'>
+            <div class="col-md-12 col-md-offset-0  aatext-center" style='font-size:90%'>
+    <!-- 
                 <div style='float:left;'>Article series:</div>
-                <div style='position:relative;left:-120px;'>
+    -->
+    {{end}}
 
-    {{ end }}
-
-    {{ if $prev1 }}
+    {{if $prev1 }}
       <a class="label label-primary" href="{{ $prev1.URL }}"  accesskey="p"><< &nbsp; {{ $prev1.Name }}</a>
-    {{ end }}
+    {{end}}
 
-
-    {{ if and $prev1 $next1 }}
+    <!-- 
+    {{if and $prev1 $next1 }}
       &nbsp; | {{$curNd.Title}} | &nbsp;
-    {{ end }}
+    {{end}}
+    -->
 
-    {{ if $next1 }}
+    {{if and $prev1 $next1 }}
+      &nbsp;  &nbsp;
+    {{end}}
+
+    {{if $next1 }}
       <a class="label label-primary" href="{{ $next1.URL }}"  accesskey="n">{{ $next1.Name }} &nbsp; >> &nbsp; </a> 
-    {{ end }}
+    {{end}}
 
 
-    {{ if or $prev1 $next1 }}
-                </div>
+    {{if or $prev1 $next1 }}
             </div>
         </div>
-    {{ end }}
+    {{end}}
+
+
 
 
 {{end}}

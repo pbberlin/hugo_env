@@ -37,16 +37,21 @@
                             <!-- exclude from menu -->
                         {{else}}
                             {{if eq ($.Scratch.Get "not_first") 1}}
-                                &middot; 
+                                &nbsp; &middot; &nbsp;
                             {{end}}
                             {{$.Scratch.Set "not_first"  1}}
                             {{ $cmp1 := lower  $.Title        }}
                             {{ $cmp1 := substr $cmp1     0 4  }}
                             {{ $cmp2 := substr $lp.Key   0 4  }}
+
+                            <!-- remove the hyphens -->
+                            {{ $formatted1 := replace $lp.Key "-" " "  }}
+                            <!-- capitalize first letter; use print to concatenate -->
+                            {{ $formatted2 := print (title (slicestr $formatted1 0 1)) (slicestr $formatted1 1)  }}
                             {{if eq  $cmp1 $cmp2 }}
-                                {{ title $lp.Key }}
+                                {{ $formatted2 }}
                             {{else}}                     
-                               <a href="/{{ urlize $lp.Key }}">{{ title $lp.Key }}</a>  
+                               <a href="/{{ urlize $lp.Key }}">{{ $formatted2 }}</a>  
                             {{end}}
                         {{end}}
                     {{ end }}
